@@ -10,39 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930231127) do
+ActiveRecord::Schema.define(:version => 20130116211049) do
 
   create_table "favorites", :force => true do |t|
-    t.integer  "user_api_id"
-    t.integer  "team_api_id"
-    t.integer  "current_amount"
-    t.integer  "last_week_amount"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.integer  "current_points"
+    t.integer  "last_week_points"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "favorites", ["team_api_id"], :name => "index_favorites_on_team_api_id"
-  add_index "favorites", ["user_api_id", "team_api_id"], :name => "index_favorites_on_user_api_id_and_team_api_id"
-  add_index "favorites", ["user_api_id"], :name => "index_favorites_on_user_api_id"
 
   create_table "teams", :force => true do |t|
-    t.integer  "team_api_id"
-    t.string   "location"
-    t.string   "nickname"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "teams", ["team_api_id"], :name => "index_teams_on_team_api_id"
 
   create_table "users", :force => true do |t|
-    t.integer  "user_api_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "points"
+    t.integer  "points_last_week"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "users", ["user_api_id"], :name => "index_users_on_user_api_id"
 
 end
