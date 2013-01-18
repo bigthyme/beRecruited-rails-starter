@@ -25,23 +25,51 @@ class LeaderboardController < ApplicationController
       # @favorite.each {|line| puts line['favorite']['user_id']}
   end
 
-  def show
-  	# team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
-  	# #Perform 3 separate get calls w/HTTParty
-  	# @team = JSON.parse(team_response)
-  	# @team.each {|line| puts line['team']['name']}
-    response = HTTParty.get('http://br-interview-api.heroku.com/teams')
-    team_data = JSON.parse(response)
-        @team = team_data.map do |line|
-          t = Team.new
-          a = line['team']['name']
-          t.name = a
-          puts t.name
-          #
-          # set name value however you want to do that
-          #t.save!
-          t.save!
-        end
+  def show	
+    #Team GET Call and store
+    team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
+    team_data = JSON.parse(team_response)
     
+    team_data.each do |line|
+      t = Team.new
+      t.name = line['team']['name']
+      t.nick = line['team']['nick']
+      t.api_team_id = line['team']['id']
+      
+      t.save
+    end
+
+    #User GET Call and store
+    user_response = HTTParty.get('http://br-interview-api.heroku.com/users')
+    user_data = JSON.parse(user_response)
+    
+    user_data.each do |line|
+      u = User.new
+      u.first_name = line['user']['first_name']
+      u.last_name = line['user']['last_name']
+      u.api_user_id = line['user']['id']  
+      u.points = line['user']['points']
+      u.points_last_week = line['user']['points_last_week']
+      
+      u.save
+    end 
+
+    #Favorite GET Call and store
+    fav_response = HTTParty.get('http://br-interview-api.heroku.com/favorites')
+    fav_data = JSON.parse(fav_response)
+    
+    fav_data.each do |line|
+      f = Favorite.new
+      f.current_points = line['favorite']['current_points']
+      f.last_week_points = line['favorite']['last_week_points']
+      f.user_id = line['favorite']['user_id']
+      f.team_id = line['favorite']['team_id']
+      
+      f.save
+    end
+
+    def create
+      #Do Something
+    end
   end
 end

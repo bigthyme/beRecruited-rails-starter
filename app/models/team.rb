@@ -1,7 +1,6 @@
 class Team < ActiveRecord::Base
 	#validates :name, :uniqueness => true
-
-	attr_accessor :api_team_id, :name
+	
 	has_many :favorites
 	has_many :users, :through => :favorites 
 
