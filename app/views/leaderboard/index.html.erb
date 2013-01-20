@@ -1,19 +1,33 @@
 <div id="main">
   <h1>&lt; Insert Team Here &gt; Leaderboard</h1>
-
-  <%# TODO: Remove this placeholder text! %>
-  <h2>Welcome to the beRecruited challenge!</h2>
+  
   <p>
-<!--   <%= @users %> -->
-  <%= @favorites %> 
+  <!-- <%= @favorites %> -->
   </p>
     
-  <%# TODO: Populate the rows in this table with data from http://br-interview-api.heroku.com %>
   <table>
     <tr>
-      <th>Name</th>
-      <th>This Week's Points</th>
-      <th>Last Week's Points</th>
+      <th>Name
+        <tb>
+          <% @leaders.each do |line| -%>
+          <p><%= line['user_id']%></p>
+          <% end %>
+        </tb>
+      </th>
+      <th>This Week's Points
+        <tb>
+          <% @leaders.each do |line| -%>
+          <p><%= line['current_points']%></p>
+          <% end %>
+        </tb>
+      </th>
+      <th>Last Week's Points
+       <tb>
+          <% @leaders.each do |line| -%>
+          <p><%= line['last_week_points']%></p>
+          <% end %>
+        </tb>
+      </th>
     </tr>
   </table>
 </div>

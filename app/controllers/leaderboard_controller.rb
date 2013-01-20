@@ -3,13 +3,14 @@ class LeaderboardController < ApplicationController
     # TODO: Fetch team based on dropdown selection 
     # @team = ?
     # @teams = Team.all
-    # @users = User.all
-    @favorites = Favorite.all
-    
+    @users = User.all
+    # @favorites = Favorite.all
 
     # TODO: Fetch top 5 leaders for this team
     # @leaders = ?
-    
+    # @leaders = Favorite.find(:all, :order => 'current_points DESC', :limit => 5)
+    @leaders = Favorite.where(:team_id => '3251').order('current_points DESC').limit(5).all
+
     # TEAMS GET CALL
     # team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
     # @team = JSON.parse(team_response)
@@ -29,6 +30,8 @@ class LeaderboardController < ApplicationController
   def show	
     #Each team has individual boards
     @team = Team.find(params[:id])
+    @leaders = Favorite.where(:team_id => '3251').order('current_points DESC').limit(5).all
+    # @leaders = Favorite.find(:all, :order => 'current_points DESC', :limit => 5)
     
     #Team GET Call and store
     # team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
@@ -43,6 +46,7 @@ class LeaderboardController < ApplicationController
     #   t.save
     # end
 
+    
 
 
     #User GET Call and store
@@ -75,7 +79,7 @@ class LeaderboardController < ApplicationController
     # end
 
     def new
-
+      # puts Favorite.where(:team_id => '3246').all
     end
   end
 end
