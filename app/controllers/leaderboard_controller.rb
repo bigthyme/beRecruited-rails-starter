@@ -12,8 +12,9 @@ class LeaderboardController < ApplicationController
     
     external_ids = @user_ids.map(&:user_id)
     @full_name = User.where(:api_user_id => external_ids).select(:first_name).select(:last_name)
-    
-    def new
+  end
+
+  def new
 
     # Team GET Call and store
         team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
@@ -57,5 +58,4 @@ class LeaderboardController < ApplicationController
           f.save
         end
     end
-  end
 end
