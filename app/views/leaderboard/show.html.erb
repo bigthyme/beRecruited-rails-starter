@@ -1,5 +1,31 @@
+<h1><%= @team.name %> <%= @team.nick %> Leaderboard</h1> 
+<h3><%= link_to "Next >>", "/leaderboard/#{params[:id].to_i+1}" %></h3>
+<h3><%= link_to "<< Back", "/leaderboard/#{params[:id].to_i-1}" %></h3>
 
-<h1><%= @team.name %> <%= @team.nick %> (<%= @team.api_team_id %>) Leaderboard</h1>
-
-
-
+<p>
+  <table>
+    <tr>
+      <th>Name
+        <tb>
+            <% @full_name.each do |line|%>
+            <p><%= line['first_name'] -%> <%= line['last_name'] -%></p>
+            <% end %>
+        </tb>
+      </th>
+      <th>This Week's Points
+        <tb>
+          <% @leaders.each do |line| -%>
+          <p><%= line.current_points %></p>
+          <% end %>
+        </tb>
+      </th>
+      <th>Last Week's Points
+       <tb>
+          <% @leaders.each do |line| -%>
+          <p><%= line.last_week_points%></p>
+          <% end %>
+        </tb>
+      </th>
+    </tr>
+  </table>
+</p>

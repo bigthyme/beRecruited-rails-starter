@@ -7,7 +7,7 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3'
 gem 'json'
-#gem 'rest-client'
+gem 'jquery-rails'
 gem 'httparty'
 
 # Use unicorn as the web server

@@ -1,34 +1,19 @@
+
 <div id="main">
-  <h1>&lt; Insert Team Here &gt; Leaderboard</h1>
-  
+  <h1>Welcome to beRecruited's Leaderboards</h1>
   <p>
-  <!-- <%= @favorites %> -->
-  </p>
-    
-  <table>
-    <tr>
-      <th>Name
-        <tb>
-          <% @leaders.each do |line| -%>
-          <p><%= line['user_id']%></p>
-          <% end %>
-        </tb>
-      </th>
-      <th>This Week's Points
-        <tb>
-          <% @leaders.each do |line| -%>
-          <p><%= line['current_points']%></p>
-          <% end %>
-        </tb>
-      </th>
-      <th>Last Week's Points
-       <tb>
-          <% @leaders.each do |line| -%>
-          <p><%= line['last_week_points']%></p>
-          <% end %>
-        </tb>
-      </th>
-    </tr>
-  </table>
+  <h3>Search for your favorite team here:</h3>
+  <%= select_tag 'team_id', options_for_select(@teams.map{|team| ["#{team.name} #{team.nick}", team.id] }) %>
 </div>
 
+<script type="text/javascript">
+  $(function(){
+       $('#team_id').bind('change', function () {
+          var url = "/leaderboard/" + $(this).val()
+          if (url) { 
+              window.location.replace(url);
+          }
+          return false;
+      });
+  });
+</script>
