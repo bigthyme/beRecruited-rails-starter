@@ -14,7 +14,6 @@ class LeaderboardController < ApplicationController
     @full_name = User.where(:api_user_id => external_ids).select(:first_name).select(:last_name)
     
     def new
-    # PREPOPULATED THE DATABASE WITH THESE GET CALLS
 
     #Team GET Call and store
         # team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
@@ -27,6 +26,7 @@ class LeaderboardController < ApplicationController
         #   t.api_team_id = line['team']['id']
           
         #   t.save
+        # end
 
     #User GET Call and store
         # user_response = HTTParty.get('http://br-interview-api.heroku.com/users')
@@ -44,18 +44,18 @@ class LeaderboardController < ApplicationController
         # end 
 
     #Favorite GET Call and store
-        # fav_response = HTTParty.get('http://br-interview-api.heroku.com/favorites')
-        # fav_data = JSON.parse(fav_response)
+        fav_response = HTTParty.get('http://br-interview-api.heroku.com/favorites')
+        fav_data = JSON.parse(fav_response)
         
-        # fav_data.each do |line|
-        #   f = Favorite.new
-        #   f.current_points = line['favorite']['current_points']
-        #   f.last_week_points = line['favorite']['last_week_points']
-        #   f.user_id = line['favorite']['user_id']
-        #   f.team_id = line['favorite']['team_id']
+        fav_data.each do |line|
+          f = Favorite.new
+          f.current_points = line['favorite']['current_points']
+          f.last_week_points = line['favorite']['last_week_points']
+          f.user_id = line['favorite']['user_id']
+          f.team_id = line['favorite']['team_id']
           
-        #   f.save
-        # end
+          f.save
+        end
     end
   end
 end
