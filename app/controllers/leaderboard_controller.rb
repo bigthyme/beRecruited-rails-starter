@@ -15,7 +15,8 @@ class LeaderboardController < ApplicationController
   end
 
   def new
-
+  #This method is purely for prepopulating the GET calls into the database (please do not visit /new)
+  
     # Team GET Call and store
         team_response = HTTParty.get('http://br-interview-api.heroku.com/teams')
         team_data = JSON.parse(team_response)
