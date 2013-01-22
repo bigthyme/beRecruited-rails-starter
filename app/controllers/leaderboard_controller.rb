@@ -1,4 +1,5 @@
 class LeaderboardController < ApplicationController
+  
   def index
     @teams = Team.all
   end
@@ -13,6 +14,7 @@ class LeaderboardController < ApplicationController
     external_ids = @user_ids.map(&:user_id)
     @full_name = User.where(:api_user_id => external_ids).select(:first_name).select(:last_name)
   end
+    
 
   def new
   #This method is purely for prepopulating the GET calls into the database (please do not visit /new)
